@@ -1,0 +1,8 @@
+mysql -u root -p
+
+CREATE USER 'user_cineverse'@'%' IDENTIFIED BY 'C15408vjD9b6hoMx8j3E2uyeQwG9KugcR656c8Y67J099gVMox';
+GRANT SELECT, INSERT, UPDATE, DELETE ON api.* TO 'user_cineverse'@'%';
+FLUSH PRIVILEGES;
+
+
+CREATE SCHEMA api;
