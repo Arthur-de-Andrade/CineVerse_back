@@ -2,14 +2,11 @@ package br.com.cineverse.CineVerse.controller;
 
 import java.util.List;
 
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.DeleteMapping;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import jakarta.validation.Valid;
+
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
 
 import br.com.cineverse.CineVerse.model.User;
 import br.com.cineverse.CineVerse.service.UserService;
@@ -18,27 +15,37 @@ import br.com.cineverse.CineVerse.service.UserService;
 @RequestMapping("/usuarios")
 public class UserController {
 
-    @Autowired
-    UserService service;
-    
+    private final UserService service;
+
+    public UserController(UserService service) {
+        this.service = service;
+    }
+
     @GetMapping
-    public List<User> listar() {
-        return service.listarTodos();
+    public ResponseEntity<List<User>> listar() {
+        return ResponseEntity.ok(service.listarTodos());
     }
 
     @PostMapping
-    public User criar(@RequestBody User usuario) {
-        return service.salvar(usuario);
+    public ResponseEntity<User> criar(@Valid @RequestBody User usuario) {
+        User salvo = service.salvar(usuario);
+        return new ResponseEntity<>(salvo, HttpStatus.CREATED);
     }
 
     @GetMapping("/{id}")
-    public User buscarPorId(@PathVariable Long id) {
-        return service.buscarPorId(id);
+    public ResponseEntity<User> buscarPorId(@PathVariable Long id) {
+        return service.buscarPorId(id)
+                      .map(ResponseEntity::ok)
+                      .orElse(ResponseEntity.notFound().build());
     }
 
     @DeleteMapping("/{id}")
-    public void deletar(@PathVariable Long id) {
-        service.deletar(id);
+    public ResponseEntity<Void> deletar(@PathVariable Long id) {
+        boolean deletado = service.deletar(id);
+        if (deletado) {
+            return ResponseEntity.noContent().build();
+        } else {
+            return ResponseEntity.notFound().build();
+        }
     }
-
 }

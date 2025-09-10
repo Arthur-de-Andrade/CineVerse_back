@@ -1,3 +1,7 @@
 /Users/luizahelena/dev/projetos/CineVerse_back/src/main/java/br/com/cineverse/CineVerse/CineVerseApplication.java
 /Users/luizahelena/dev/projetos/CineVerse_back/src/main/java/br/com/cineverse/CineVerse/ServletInitializer.java
 /Users/luizahelena/dev/projetos/CineVerse_back/src/main/java/br/com/cineverse/CineVerse/config/SecurityConfig.java
+/Users/luizahelena/dev/projetos/CineVerse_back/src/main/java/br/com/cineverse/CineVerse/controller/UserController.java
+/Users/luizahelena/dev/projetos/CineVerse_back/src/main/java/br/com/cineverse/CineVerse/model/User.java
+/Users/luizahelena/dev/projetos/CineVerse_back/src/main/java/br/com/cineverse/CineVerse/repository/UserRepository.java
+/Users/luizahelena/dev/projetos/CineVerse_back/src/main/java/br/com/cineverse/CineVerse/service/UserService.java

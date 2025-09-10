@@ -1,21 +1,14 @@
 package br.com.cineverse.CineVerse.service;
 
-import org.springframework.stereotype.Service;
-import java.util.List;
-
 import br.com.cineverse.CineVerse.model.User;
 import br.com.cineverse.CineVerse.repository.UserRepository;
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import org.springframework.stereotype.Service;
 
-@Entity
+import java.util.List;
+import java.util.Optional;
+
 @Service
 public class UserService {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
 
     private final UserRepository repository;
 
@@ -23,25 +16,29 @@ public class UserService {
         this.repository = repository;
     }
 
-    public UserRepository getRepository() {
-        return repository;
-    }
-
+    // Listar todos os usuários
     public List<User> listarTodos() {
         return repository.findAll();
     }
 
+    // Buscar usuário por ID
+    public Optional<User> buscarPorId(Long id) {
+        return repository.findById(id);
+    }
+
+    // Salvar ou atualizar usuário
     public User salvar(User user) {
         return repository.save(user);
     }
 
-    public void deletar(Long id) {
-        repository.deleteById(id);
+    // Deletar usuário por ID
+    public boolean deletar(Long id) {
+        if (repository.existsById(id)) {
+            repository.deleteById(id);
+            return true;
+        }
+        return false;
     }
-
-    public User buscarPorId(Long id) {
-        return repository.findById(id).orElse(null);
-    }
-
-
 }
+
+

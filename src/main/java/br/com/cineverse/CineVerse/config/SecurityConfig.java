@@ -33,10 +33,10 @@ public class SecurityConfig {
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
         http
             .authorizeHttpRequests(auth -> auth
-                .anyRequest().authenticated()  // exige autenticação para tudo
+                .anyRequest().authenticated()  
             )
-            .httpBasic();  // ativa autenticação básica HTTP (login via browser)
-        return http.build();
+            .httpBasic();
+             return http.build();
     }
 
 }

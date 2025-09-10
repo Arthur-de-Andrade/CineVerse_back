@@ -1,3 +1,7 @@
 br/com/cineverse/CineVerse/config/SecurityConfig.class
 br/com/cineverse/CineVerse/CineVerseApplication.class
+br/com/cineverse/CineVerse/model/User.class
 br/com/cineverse/CineVerse/ServletInitializer.class
+br/com/cineverse/CineVerse/repository/UserRepository.class
+br/com/cineverse/CineVerse/controller/UserController.class
+br/com/cineverse/CineVerse/service/UserService.class
